@@ -22,6 +22,7 @@ window.onload = function() {
     function displayBook(book, isBookshelf) {
       // Create a div for the book
       let bookDiv = document.createElement('div');
+      bookDiv.classList.add('book');
   
       // Create and append elements for the book's title, author, ISBN, description, and image
       let title = document.createElement('h2');
@@ -147,9 +148,6 @@ window.onload = function() {
             // Create a div to hold the search results
             searchResultsDiv = document.createElement('div');
   
-            // Add a class to the div for styling purposes
-            searchResultsDiv.classList.add('search-results');
-  
             // For each item in the data, display the book and add the bookmark icon
             data.items.forEach(item => {
               let book = item.volumeInfo;
@@ -165,7 +163,7 @@ window.onload = function() {
                     author: book.authors ? book.authors[0] : "Author Unknown",
                     isbn: bookId,
                     description: book.description ? book.description.substring(0, 200) : "Information missing",
-                    img: book.imageLinks ? book.imageLinks.thumbnail : 'https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/Salesforce_P1_FR/unavailable.png'
+                    img: book.imageLinks ? book.imageLinks.thumbnail : 'https://raw.githubusercontent.com/erictalterio/MagicFeather/c1e249cfede00a18dd4620b159c857313117508a/unavailable.png'
                   };
   
                   bookshelf.push(newBook);
@@ -181,7 +179,7 @@ window.onload = function() {
                 author: book.authors ? book.authors[0] : "Author Unknown",
                 isbn: book.industryIdentifiers ? book.industryIdentifiers[0].identifier : "ISBN Unknown",
                 description: book.description ? book.description.substring(0, 200) : "Information missing",
-                img: book.imageLinks ? book.imageLinks.thumbnail : 'https://s3-eu-west-1.amazonaws.com/course.oc-static.com/projects/Salesforce_P1_FR/unavailable.png',
+                img: book.imageLinks ? book.imageLinks.thumbnail : 'https://raw.githubusercontent.com/erictalterio/MagicFeather/c1e249cfede00a18dd4620b159c857313117508a/unavailable.png',
                 bookmarkIcon: bookmarkIcon
               }, false);
             });
@@ -191,11 +189,11 @@ window.onload = function() {
           });
       });
   
-/// Event listener for the cancel button click
-cancelButton.addEventListener('click', function() {
-    // Reload the page
-    location.reload();
-  });
+      // Event listener for the cancel button click
+      cancelButton.addEventListener('click', function() {
+        // Reload the page
+        location.reload();
+      });
   
     });
   };
