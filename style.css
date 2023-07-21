@@ -101,7 +101,9 @@ body {
   }
   
   .search-results {
-    column-count: 2;
-    column-gap: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
   }
   
