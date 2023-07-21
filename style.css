@@ -98,7 +98,7 @@ body {
     color: green;
     cursor: pointer;
     font-size: 20px;
-  }
+  } 
   
   .search-results {
     display: flex;
@@ -106,4 +106,9 @@ body {
     flex-wrap: wrap;
     gap: 10px;
   }
-  
+
+  #logo {
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+  }

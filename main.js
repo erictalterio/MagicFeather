@@ -4,6 +4,16 @@ window.onload = function() {
   let myBooksDiv = document.getElementById('myBooks');
   let contentDiv = document.getElementById('content');
 
+  // Create and set up the logo image
+  let logoImg = document.createElement('img');
+  logoImg.src = 'https://github.com/erictalterio/MagicFeather/blob/0111360887f0edea991450f0192b6675f137d195/logo.png?raw=true';
+  logoImg.alt = 'Logo';
+  logoImg.id = 'logo';
+
+  // Insert the logo image above the 'PocketBooks' title
+  let titleElement = document.querySelector('.title');
+  titleElement.insertAdjacentElement('beforebegin', logoImg);
+
   // Create and set up the 'Add a Book' button
   let addButton = document.createElement('button');
   addButton.textContent = 'Add a Book';
