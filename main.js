@@ -1,4 +1,4 @@
-// On window load
+// On page load
 window.onload = function() {
   // Get the 'myBooks' and 'content' div elements
   let myBooksDiv = document.getElementById('myBooks');
@@ -148,7 +148,7 @@ window.onload = function() {
       }
 
       // Construct the request URL for the Google Books API
-      let requestUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}+inauthor:${author}`;
+      let requestUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}+inauthor:${author}&langRestrict=en`;
 
       // Fetch the data from the Google Books API
       fetch(requestUrl)
