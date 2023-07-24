@@ -7,7 +7,7 @@ window.onload = function() {
   // Create and set up the logo image
   let logoImg = document.createElement('img');
   logoImg.src = 'https://github.com/erictalterio/MagicFeather/blob/0111360887f0edea991450f0192b6675f137d195/logo.png?raw=true';
-  logoImg.alt = 'Logo';
+  logoImg.alt = 'Poch Lib';
   logoImg.id = 'logo';
 
   // Insert the logo image above the 'PocketBooks' title
@@ -141,6 +141,12 @@ window.onload = function() {
       let bookTitle = document.getElementById('bookTitleInput').value;
       let author = document.getElementById('authorInput').value;
 
+      // Check if both book title and author are provided
+      if (!bookTitle || !author) {
+        alert('Please provide both the book title and the author name.');
+        return; // Stop the form submission if the fields are empty
+      }
+
       // Construct the request URL for the Google Books API
       let requestUrl = `https://www.googleapis.com/books/v1/volumes?q=${bookTitle}+inauthor:${author}`;
 
@@ -158,61 +164,76 @@ window.onload = function() {
           searchResultsDiv.classList.add('search-results');
           myBooksDiv.insertBefore(searchResultsDiv, divider);
 
-          // For each item in the data, display the book and add the bookmark icon
-          data.items.forEach(item => {
-            let book = item.volumeInfo;
-            let bookmarkIcon = document.createElement('i');
-            bookmarkIcon.className = 'fa fa-bookmark';
+          // Check if there are search results
+          if (data.items && data.items.length > 0) {
+            // For each item in the data, display the book and add the bookmark icon
+            data.items.forEach(item => {
+              let book = item.volumeInfo;
+              let bookmarkIcon = document.createElement('i');
+              bookmarkIcon.className = 'fa fa-bookmark';
 
-            bookmarkIcon.addEventListener('click', function() {
-              let bookId = book.industryIdentifiers ? book.industryIdentifiers[0].identifier : null;
-              if (bookId && !bookshelf.some(b => b.id === bookId)) {
-                let newBook = {
-                  id: bookId,
-                  title: book.title,
-                  author: book.authors ? book.authors[0] : "Author Unknown",
-                  isbn: bookId,
-                  description: book.description ? book.description.substring(0, 200) : "Information missing",
-                  img: book.imageLinks ? book.imageLinks.thumbnail : 'https://raw.githubusercontent.com/erictalterio/MagicFeather/c1e249cfede00a18dd4620b159c857313117508a/unavailable.png'
-                };
+              bookmarkIcon.addEventListener('click', function() {
+                let bookId = book.industryIdentifiers ? book.industryIdentifiers[0].identifier : null;
+                if (bookId && !bookshelf.some(b => b.id === bookId)) {
+                  let newBook = {
+                    id: bookId,
+                    title: book.title,
+                    author: book.authors ? book.authors[0] : "Author Unknown",
+                    isbn: bookId,
+                    description: book.description ? book.description.substring(0, 200) : "Information missing",
+                    img: book.imageLinks ? book.imageLinks.thumbnail : 'https://raw.githubusercontent.com/erictalterio/MagicFeather/c1e249cfede00a18dd4620b159c857313117508a/unavailable.png'
+                  };
 
-                bookshelf.push(newBook);
-                sessionStorage.setItem('bookshelf', JSON.stringify(bookshelf));
-                displayBook(newBook, true);
-              } else {
-                alert('You cannot add the same book twice');
-              }
+                  bookshelf.push(newBook);
+                  sessionStorage.setItem('bookshelf', JSON.stringify(bookshelf));
+                  displayBook(newBook, true);
+                } else {
+                  alert('You cannot add the same book twice');
+                }
+              });
+
+              // Create and nest the 'book' div inside 'search-results' div
+              let bookDiv = document.createElement('div');
+              bookDiv.classList.add('book');
+              searchResultsDiv.appendChild(bookDiv);
+
+              // Create and append elements for the book's title, author, ISBN, description, and image
+              let title = document.createElement('h2');
+              title.textContent = book.title;
+              bookDiv.appendChild(title);
+
+              let authorPara = document.createElement('p');
+              authorPara.textContent = book.authors ? book.authors[0] : "Author Unknown";
+              bookDiv.appendChild(authorPara);
+
+              let isbnPara = document.createElement('p');
+              isbnPara.textContent = book.industryIdentifiers ? book.industryIdentifiers[0].identifier : "ISBN Unknown";
+              bookDiv.appendChild(isbnPara);
+
+              let descriptionPara = document.createElement('p');
+              descriptionPara.textContent = book.description ? book.description.substring(0, 200) : "Information missing";
+              bookDiv.appendChild(descriptionPara);
+
+              let img = document.createElement('img');
+              img.src = book.imageLinks ? book.imageLinks.thumbnail : 'https://raw.githubusercontent.com/erictalterio/MagicFeather/c1e249cfede00a18dd4620b159c857313117508a/unavailable.png';
+              bookDiv.appendChild(img);
+
+              // If the book has a bookmark icon, append it
+              bookDiv.appendChild(bookmarkIcon);
             });
-
-            // Create and nest the 'book' div inside 'search-results' div
-            let bookDiv = document.createElement('div');
-            bookDiv.classList.add('book');
-            searchResultsDiv.appendChild(bookDiv);
-
-            // Create and append elements for the book's title, author, ISBN, description, and image
-            let title = document.createElement('h2');
-            title.textContent = book.title;
-            bookDiv.appendChild(title);
-
-            let authorPara = document.createElement('p');
-            authorPara.textContent = book.authors ? book.authors[0] : "Author Unknown";
-            bookDiv.appendChild(authorPara);
-
-            let isbnPara = document.createElement('p');
-            isbnPara.textContent = book.industryIdentifiers ? book.industryIdentifiers[0].identifier : "ISBN Unknown";
-            bookDiv.appendChild(isbnPara);
-
-            let descriptionPara = document.createElement('p');
-            descriptionPara.textContent = book.description ? book.description.substring(0, 200) : "Information missing";
-            bookDiv.appendChild(descriptionPara);
-
-            let img = document.createElement('img');
-            img.src = book.imageLinks ? book.imageLinks.thumbnail : 'https://raw.githubusercontent.com/erictalterio/MagicFeather/c1e249cfede00a18dd4620b159c857313117508a/unavailable.png';
-            bookDiv.appendChild(img);
-
-            // If the book has a bookmark icon, append it
-            bookDiv.appendChild(bookmarkIcon);
-          });
+          } else {
+            // Display "No book was found" message if no search results are returned
+            let noResultsMessage = document.createElement('p');
+            noResultsMessage.textContent = 'No book was found.';
+            searchResultsDiv.appendChild(noResultsMessage);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          // Display error message if there's an issue with fetching data
+          let errorMessage = document.createElement('p');
+          errorMessage.textContent = 'An error occurred while fetching data. Please try again later.';
+          searchResultsDiv.appendChild(errorMessage);
         });
     });
 
