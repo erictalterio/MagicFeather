@@ -1,22 +1,24 @@
-/* styles.css */
+/* Global styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-.title {
+.title,
+#myBooks h2,
+#content h2 {
   text-align: center;
 }
 
 #myBooks {
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
-#addButton, #searchButton {
-  background-color: green;
+:is(#addButton, #searchButton, #cancelButton) {
+  background-color: #42948B;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -26,25 +28,27 @@ body {
 }
 
 #cancelButton {
-  background-color: red;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 10px;
+  background-color: #DF5A4B;
+}
+
+#searchButton,
+#cancelButton {
+  display: block;
 }
 
 form {
   margin-bottom: 20px;
 }
+
 form div {
   margin-bottom: 10px;
 }
+
 form label {
   display: block;
   font-weight: bold;
 }
+
 form input[type=text] {
   width: 100%;
   padding: 5px;
@@ -60,35 +64,40 @@ form input[type=text] {
   font-family: "Courier New", Courier, monospace;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
-  max-width: 240px;
+  max-width: 100%;
   -moz-column-break-inside: avoid;
        break-inside: avoid-column;
 }
+
 .book h2 {
   font-size: 24px;
   margin-bottom: 10px;
 }
+
 .book p {
   margin-bottom: 8px;
 }
+
 .book p:first-of-type {
   font-weight: bold;
 }
+
 .book .fa-trash {
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 10px;
   color: red;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
 }
+
 .book .fa-bookmark {
   position: absolute;
-  top: 10px;
+  top: 5px;
   right: 40px;
   color: green;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .search-results {
@@ -102,4 +111,26 @@ form input[type=text] {
   width: 100px;
   display: block;
   margin: 0 auto;
+}
+
+/* Media query for tablets */
+@media screen and (min-width: 768px) {
+  #myBooks {
+    padding: 20px;
+    max-width: 600px;
+  }
+  .book {
+    min-width: 250px;
+  }
+  .book .fa-trash,
+  .book .fa-bookmark {
+    top: 10px;
+    font-size: 20px;
+  }
+}
+/* Media query for desktop */
+@media screen and (min-width: 1024px) {
+  .book {
+    max-width: 240px;
+  }
 }/*# sourceMappingURL=style.css.map */
