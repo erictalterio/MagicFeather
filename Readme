@@ -1,0 +1,46 @@
+PocketBooks - Installation Guide
+PocketBooks is a simple web application that allows you to search for books and add them to your bookshelf. Follow the instructions below to set up the project and run it on your local machine.
+
+Prerequisites
+Before you begin, ensure you have the following software installed on your computer:
+
+Web Browser (e.g., Google Chrome, Mozilla Firefox)
+Text Editor (e.g., Visual Studio Code, Sublime Text)
+
+Getting Started
+Clone the Repository: Start by cloning the project repository to your local machine using the following command in your terminal or command prompt:
+
+git clone <repository-url>
+Replace <repository-url> with the actual URL of the repository.
+
+Navigate to the Project Directory: Change your current directory to the project folder:
+
+cd pocketbooks
+
+Open the Files: Use your preferred text editor to open the index.html, style.css, and main.js files. These files contain the HTML, CSS, and JavaScript code for the PocketBooks application.
+
+View in the Browser: To view the PocketBooks application, open the index.html file in your web browser. You can do this by right-clicking the file and selecting "Open with" and then choosing your web browser.
+
+Usage
+Searching for Books:
+
+When the application loads, you will see the "PocketBooks" title and the "Add a Book" button.
+Click on the "Add a Book" button to open a search form.
+Enter the book title and author name in the respective input fields and click the "Search" button.
+The search results, if any, will be displayed below the search form.
+Click on the "Bookmark" icon next to a book to add it to your bookshelf.
+Bookshelf:
+
+Books added to the bookshelf will appear below the "My Bookshelf" heading on the main page.
+Each book in the bookshelf will have a "Trash" icon that allows you to remove the book from the bookshelf.
+Customization
+The PocketBooks application can be customized by modifying the CSS and JavaScript code. You can change the appearance and behavior of the application to suit your preferences or add new features as needed.
+
+Libraries and Resources Used
+Font Awesome (https://fontawesome.com): The application uses Font Awesome icons to display the bookmark and trash icons.
+Troubleshooting
+If you encounter any issues or errors while using PocketBooks, please ensure the following:
+
+Make sure you have a stable internet connection to fetch book data from the Google Books API.
+Double-check that the necessary JavaScript and CSS files are properly linked in the index.html file.
+Ensure that your browser is up to date and supports ES6 JavaScript features.
